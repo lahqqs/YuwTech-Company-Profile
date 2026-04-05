@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YuwTech | Enterprise IT Solutions & Software Development</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f172a;       
+            --accent: #2563eb;         
+            --accent-light: #60a5fa;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 50px -12px rgba(15, 23, 42, 0.15);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius: 12px;
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --card-bg: #ffffff;
+            --main-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --shadow-premium: 0 30px 60px -12px rgba(15, 23, 42, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text-main); 
+            background: var(--white); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+        section { padding: 120px 8%; position: relative; }
+        h1, h2, h3 { color: var(--primary); font-weight: 700; line-height: 1.2; }
+        a { text-decoration: none; transition: var(--transition); }
+        ul { list-style: none; }
+
+        
+        nav {
+            position: fixed;
+            top: 0; width: 100%; height: 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 8%; z-index: 1000;
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            height: 70px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+
+        .nav-menu { display: flex; gap: 40px; align-items: center; }
+        .nav-link { font-size: 0.95rem; font-weight: 500; color: var(--text-main); }
+        .nav-link:hover { color: var(--accent); }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-cta:hover { transform: translateY(-2px); background: var(--accent); }
+
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            background: radial-gradient(circle at 80% 20%, #eff6ff 0%, #ffffff 100%);
+            padding-top: 80px;
+        }
+        .hero-content { max-width: 800px; }
+        .hero-tag { 
+            display: inline-block; padding: 6px 16px; background: #dbeafe; 
+            color: var(--accent); border-radius: 50px; font-size: 0.85rem; 
+            font-weight: 700; margin-bottom: 24px; text-transform: uppercase;
+        }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: var(--text-light); margin-bottom: 40px; max-width: 600px; }
+        .hero-btns { display: flex; gap: 20px; }
+
+        .partners { padding: 60px 0; background: var(--white); border-bottom: 1px solid var(--border); overflow: hidden; }
+        .marquee-container { display: flex; overflow: hidden; user-select: none; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .marquee-content { 
+            display: flex; gap: 80px; flex-shrink: 0; min-width: 100%;
+            animation: scroll 30s linear infinite; padding: 20px 0;
+        }
+        .partners:hover .marquee-content { animation-play-state: paused; }
+        .partner-logo { 
+            height: 40px; filter: grayscale(100%); opacity: 0.6; 
+            transition: var(--transition); cursor: pointer;
+        }
+        .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .services { background: var(--bg-light); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
+        .card {
+            background: var(--white); padding: 40px; border-radius: var(--radius);
+            border: 1px solid var(--border); transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--accent-light); }
+        .icon-box { 
+            width: 60px; 
+            height: 60px; 
+            background: #eff6ff; 
+            border-radius: 12px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            color: var(--accent); 
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        .card:hover .icon-box {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .icon-box svg {
+            width: 30px;
+            height: 30px;
+            stroke-width: 2; 
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .main-product-card {
+            background: var(--main-gradient);
+            border-radius: 24px;
+            padding: 60px;
+            color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-premium);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .secondary-products {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px;
+        }
+
+        .mini-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .mini-card:hover {
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
+        }
+
+        #products { background: #ffffff; padding: 120px 8%; }
+        
+        .products-header { text-align: center; max-width: 750px; margin: 0 auto 80px; }
+        .products-header h2 { font-size: 3rem; letter-spacing: -1.5px; margin-bottom: 20px; }
+        .products-header p { color: var(--text-light); font-size: 1.2rem; line-height: 1.6; }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .main-product-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px;
+            padding: 60px;
+            color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 30px 60px -12px rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .main-product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .featured-label {
+            background: var(--accent);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: fit-content;
+            margin-bottom: 24px;
+        }
+
+        .main-product-card h3 { color: white; font-size: 2.5rem; margin-bottom: 20px; }
+        .main-product-card p { color: #94a3b8; font-size: 1.15rem; margin-bottom: 40px; max-width: 450px; }
+
+        .secondary-products {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .mini-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mini-card:hover {
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
+        }
+
+        .mini-card h4 { font-size: 1.25rem; margin-bottom: 12px; color: var(--primary); }
+        .mini-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+
+        .btn-premium {
+            background: var(--accent);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            width: fit-content;
+            transition: var(--transition);
+        }
+        .btn-premium:hover { background: #1d4ed8; transform: scale(1.05); }
+
+        .link-simple {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 1100px) {
+            .products-container { grid-template-columns: 1fr; }
+            .secondary-products { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .secondary-products { grid-template-columns: 1fr; }
+            .main-product-card { padding: 40px 30px; }
+        }
+
+        .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; }
+        .contact-form { background: var(--white); border: 1px solid var(--border); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit;
+        }
+        .form-group input:focus { border-color: var(--accent); outline: none; }
+
+        footer { background: var(--primary); color: #94a3b8; padding: 80px 8% 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { color: var(--white); margin-bottom: 20px; display: block; }
+        .footer-title { color: var(--white); font-weight: 600; margin-bottom: 24px; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a:hover { color: var(--white); }
+
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .hamburger span { width: 28px; height: 3px; background: var(--primary); border-radius: 5px; transition: var(--transition); }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .contact-container { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
+                background: var(--white); flex-direction: column; padding: 40px; transition: 0.5s;
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: flex; }
+            .hero { text-align: center; }
+            .hero-btns { justify-content: center; }
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="logo-container">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="20" fill="#0F172A"/>
+                <path d="M30 35L50 55L70 35" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+                <path d="M30 55L50 75L70 55" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="5" fill="#60A5FA"/>
+            </svg>
+            <div class="logo-text">Yuw<span>Tech</span></div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#products" class="nav-link">Products</a></li>
+            <li><a href="#contact" class="nav-cta">Work With Us</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Enterprise IT Solutions</span>
+            <h1>Engineering Scalable Digital Ecosystems</h1>
+            <p>From custom software development to national IT infrastructure, YuwTech provides the technical backbone for Indonesia's growing industries.</p>
+            <div class="hero-btns">
+                <a href="#services" class="nav-cta" style="padding: 16px 32px; font-size: 1rem;">Our Solutions</a>
+                <a href="#about" class="nav-link" style="padding: 16px 0; border-bottom: 2px solid var(--accent);">Learn More &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" class="partner-logo">
+                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/linux.svg" alt="Linux" class="partner-logo">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Linux_logo.svg" alt="Linux" class="partner-logo"> -->
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" alt="MySQL" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PostgreSQL" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="NodeJS" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Go_Logo_Blue.svg" alt="Golang" class="partner-logo">
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" class="partner-logo">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Linux_logo.svg" alt="Linux" class="partner-logo"> -->
+                 <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/linux.svg" alt="Linux" class="partner-logo">`
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" alt="MySQL" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PostgreSQL" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="NodeJS" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Go_Logo_Blue.svg" alt="Golang" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="contact-container">
+            <div>
+                <span class="hero-tag">Who We Are</span>
+                <h2 class="section-title">A National Technology Leader</h2>
+                <p style="margin-top: 20px; color: var(--text-light); font-size: 1.1rem;">
+                    PT. YuwTech adalah perusahaan teknologi informasi yang berkomitmen untuk menghadirkan solusi digital inovatif dan terintegrasi bagi berbagai sektor industri di Indonesia.
+                    Kami menyediakan layanan pengembangan perangkat lunak, solusi IT, serta infrastruktur teknologi yang dirancang untuk meningkatkan efisiensi operasional dan memperkuat daya saing bisnis klien.
+                    Dengan kantor pusat di Tanjung Barat, Jakarta Selatan, dan didukung oleh tim profesional yang berpengalaman, YuwTech terus berkembang sebagai mitra terpercaya dalam transformasi digital, menghadirkan layanan unggulan di bidang Web & Mobile Applications, Hardware & Software Products, IT Services, serta IT Training.
+
+                </p>
+                <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 40px;">
+                    <div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Our Vision</h3>
+                        <p style="font-size: 0.9rem;">Menjadi mitra teknologi terpercaya dalam mendorong transformasi digital bagi berbagai sektor industri di Indonesia dan Asia Tenggara.</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Our Mission</h3>
+                        <p style="font-size: 0.9rem;">Menghadirkan solusi teknologi informasi yang inovatif, aman, dan terintegrasi guna meningkatkan efisiensi operasional serta memperkuat daya saing bisnis klien.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #f1f5f9; border-radius: var(--radius); min-height: 300px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                <div style="width: 80%; height: 80%; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 20px;">
+                    <div style="width: 100%; height: 20px; background: #e2e8f0; border-radius: 10px; margin-bottom: 15px;"></div>
+                    <div style="width: 60%; height: 20px; background: #e2e8f0; border-radius: 10px; margin-bottom: 15px;"></div>
+                    <div style="width: 100%; height: 150px; background: #eff6ff; border-radius: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="services" class="services">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title">Specialized Services</h2>
+            <p>Kami menghadirkan berbagai solusi teknologi terintegrasi untuk mendukung transformasi digital dan meningkatkan efisiensi operasional bisnis Anda.</p>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <h3>Web & Mobile Applications</h3>
+                <p>Solusi pengembangan berstandar enterprise yang dirancang untuk performa tinggi, keamanan optimal, serta mendukung kebutuhan bisnis kompleks.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                </div>
+                <h3>Software & Hardware Products</h3>
+                <p>Penyediaan solusi terintegrasi untuk mendukung operasional bisnis secara efisien, stabil, dan berkelanjutan.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    </svg>
+                </div>
+                <h3>IT Infrastructure</h3>
+                <p>Layanan jaringan, server, dan sistem pendukung untuk memastikan stabilitas dan keamanan operasional bisnis Anda.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                </div>
+                <h3>IT Training</h3>
+                <p>Program profesional untuk meningkatkan kompetensi tim dalam menghadapi perkembangan teknologi secara adaptif.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <h3>Custom IT Solutions</h3>
+                <p>Pengembangan solusi yang disesuaikan dengan kebutuhan spesifik bisnis untuk meningkatkan daya saing perusahaan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="products-header">
+            <span class="hero-tag">Proprietary Solutions</span>
+            <h2>Future-Proof Technology for Modern Enterprises</h2>
+            <p>Empower your business with our robust ecosystem of software products designed for national scalability and operational excellence.</p>
+        </div>
+
+        <div class="products-container">
+            <div class="main-product-card">
+                <div class="featured-label">Core Flagship</div>
+                <h3>YuwCORE ERP</h3>
+                <p>Solusi Enterprise Resource Planning terintegrasi yang dirancang untuk menyatukan seluruh proses bisnis dalam satu sistem yang efisien dan terpusat. Mengelola keuangan, operasional, rantai pasok, hingga sumber daya manusia secara real-time untuk meningkatkan produktivitas dan pengambilan keputusan berbasis data.</p>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <a href="#contact" class="btn-premium">Request Demo</a>
+                    <span style="font-size: 0.9rem; color: #64748b;">Trusted by Growing Companies</span>
+                </div>
+            </div>
+
+            <div class="secondary-products">
+                <div class="mini-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">☁️</div>
+                    <h4>YuwCloud</h4>
+                    <p>Solusi cloud computing berbasis lokal dengan standar keamanan tinggi dan performa optimal, dirancang untuk mendukung kebutuhan infrastruktur digital bisnis secara fleksibel, scalable, dan efisien.</p>
+                    <a href="#contact" class="link-simple">Learn More &rarr;</a>
+                </div>
+
+                <div class="mini-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">👥</div>
+                    <h4>YuwCRM</h4>
+                    <p>Platform Customer Relationship Management yang membantu perusahaan dalam membangun hubungan pelanggan yang lebih kuat melalui pengelolaan data terpusat, analisis perilaku pelanggan, serta otomatisasi proses penjualan.</p>
+                    <a href="#contact" class="link-simple">Learn More &rarr;</a>
+                </div>
+
+                <div class="mini-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">🛒</div>
+                    <h4>YuwPOS</h4>
+                    <p>Sistem Point of Sale generasi terbaru yang mendukung sinkronisasi multi-cabang secara real-time untuk operasional ritel yang lebih optimal.</p>
+                    <a href="#contact" class="link-simple">Learn More &rarr;</a>
+                </div>
+
+                <div class="mini-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">⚙️</div>
+                    <h4>Custom Solutions</h4>
+                    <p>Pengembangan solusi perangkat lunak yang dirancang khusus untuk menjawab kebutuhan unik dan tantangan bisnis Anda.</p>
+                    <a href="#contact" class="link-simple">Consult Now &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <div>
+                <h2 class="section-title">Let's Discuss Your Project</h2>
+                <p style="margin: 20px 0 40px; color: var(--text-light);">Our consultants are ready to help you navigate your digital journey.</p>
+                <div style="margin-bottom: 20px;">
+                    <strong>Location:</strong><br>
+                    Tanjung Barat, South Jakarta, Indonesia
+                </div>
+                <div>
+                    <strong>Email:</strong><br>
+                    contact@yuwtech.co.id
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Example" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Corporate Email</label>
+                        <input type="email" placeholder="example@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="5" placeholder="How can we help?"></textarea>
+                    </div>
+                    <button type="submit" class="nav-cta" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="logo-text" style="color: white; margin-bottom: 20px;">Yuw<span>Tech</span></div>
+                <p>National leader in IT Infrastructure and Software Development solutions.</p>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-title">Services</h4>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">IT Infrastructure</a></li>
+                    <li><a href="#">Managed Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-title">Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-title">Social</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid #1e293b; padding-top: 30px; text-align: center; font-size: 0.85rem;">
+            &copy; 2026 PT. YuwTech Indonesia. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // STICKY NAVBAR EFFECT
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE MENU TOGGLE
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translate(7px, -7px)' : 'none';
+        });
+
+        // FORM SUBMISSION (Mock)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent to the YuwTech team.');
+            e.target.reset();
+        });
+
+        // SMOOTH SCROLL FOR LINKS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.remove('active');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
